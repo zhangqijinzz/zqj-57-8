@@ -44,6 +44,11 @@ export interface Game {
   category: string;
 }
 
+export interface RecentGame {
+  gameId: string;
+  lastPlayedAt: number;
+}
+
 export interface Recipe {
   id: string;
   name: string;

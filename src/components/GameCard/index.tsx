@@ -2,16 +2,27 @@ import React from 'react';
 import { View, Text, Image } from '@tarojs/components';
 import styles from './index.module.scss';
 import type { Game } from '@/types';
+import { useAppStore } from '@/store/useAppStore';
 
 interface GameCardProps {
   game: Game;
   onClick?: (game: Game) => void;
+  showFavorite?: boolean;
 }
 
-const GameCard: React.FC<GameCardProps> = ({ game, onClick }) => {
+const GameCard: React.FC<GameCardProps> = ({ game, onClick, showFavorite = true }) => {
+  const isFavorite = useAppStore((state) => state.favoriteGameIds.includes(game.id));
+  const toggleFavorite = useAppStore((state) => state.toggleFavorite);
+
   const handleClick = () => {
     console.log('[GameCard] 点击游戏:', game.id, game.name);
     onClick?.(game);
+  };
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    console.log('[GameCard] 点击收藏:', game.id, game.name, !isFavorite);
+    toggleFavorite(game.id);
   };
 
   const getDifficultyStars = () => {
@@ -41,6 +52,14 @@ const GameCard: React.FC<GameCardProps> = ({ game, onClick }) => {
           mode="aspectFill"
           onError={(e) => console.error('[GameCard] 封面加载失败:', e.detail)}
         />
+        {showFavorite && (
+          <View
+            className={`${styles.favoriteBtn} ${isFavorite ? styles.favorited : ''}`}
+            onClick={handleFavoriteClick}
+          >
+            <Text className={styles.favoriteIcon}>★</Text>
+          </View>
+        )}
         <Text className={styles.categoryTag}>{game.category}</Text>
         <Text className={styles.playCount}>▶ {formatPlayCount(game.playCount)}</Text>
       </View>

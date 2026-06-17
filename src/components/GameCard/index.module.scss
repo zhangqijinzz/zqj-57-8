@@ -23,15 +23,49 @@
     height: 100%;
   }
 
-  .categoryTag {
+  .favoriteBtn {
     position: absolute;
     top: $spacing-md;
     left: $spacing-md;
+    width: 56rpx;
+    height: 56rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+    transition: all $transition-base;
+
+    &:active {
+      transform: scale(0.9);
+    }
+
+    &.favorited {
+      background: rgba($color-warning, 0.9);
+
+      .favoriteIcon {
+        color: $color-text-white;
+      }
+    }
+
+    .favoriteIcon {
+      font-size: 32rpx;
+      color: $color-text-white;
+      opacity: 0.8;
+    }
+  }
+
+  .categoryTag {
+    position: absolute;
+    top: $spacing-md;
+    left: 80rpx;
     font-size: $font-size-xs;
     padding: 4rpx 16rpx;
     border-radius: $radius-xs;
     background: rgba($color-primary, 0.9);
     color: $color-text-white;
+    z-index: 1;
   }
 
   .playCount {
@@ -43,6 +77,7 @@
     border-radius: $radius-xs;
     background: rgba(0, 0, 0, 0.6);
     color: $color-text-white;
+    z-index: 1;
   }
 }
 
