@@ -30,7 +30,6 @@ const GamesPage: React.FC = () => {
   const favoriteGameIds = useAppStore((state) => state.favoriteGameIds);
   const recentGames = useAppStore((state) => state.recentGames);
   const initGameData = useAppStore((state) => state.initGameData);
-  const addRecentGame = useAppStore((state) => state.addRecentGame);
 
   useEffect(() => {
     initGameData();
@@ -72,15 +71,6 @@ const GamesPage: React.FC = () => {
 
   const handleGameClick = (game: Game) => {
     console.log('[GamesPage] 点击游戏:', game.id, game.name);
-
-    setLocalGames((prev) =>
-      prev.map((g) =>
-        g.id === game.id ? { ...g, playCount: g.playCount + 1 } : g
-      )
-    );
-
-    addRecentGame(game.id);
-
     Taro.navigateTo({
       url: `/pages/game-detail/index?id=${game.id}`,
     });

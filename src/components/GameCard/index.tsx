@@ -57,7 +57,7 @@ const GameCard: React.FC<GameCardProps> = ({ game, onClick, showFavorite = true 
             className={`${styles.favoriteBtn} ${isFavorite ? styles.favorited : ''}`}
             onClick={handleFavoriteClick}
           >
-            <Text className={styles.favoriteIcon}>★</Text>
+            <Text className={styles.favoriteIcon}>{isFavorite ? '★' : '☆'}</Text>
           </View>
         )}
         <Text className={styles.categoryTag}>{game.category}</Text>

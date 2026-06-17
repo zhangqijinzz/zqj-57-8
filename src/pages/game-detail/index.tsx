@@ -89,7 +89,7 @@ const GameDetailPage: React.FC = () => {
           className={classnames(styles.favoriteBtn, isFavorite && styles.favorited)}
           onClick={handleFavoriteClick}
         >
-          <Text className={styles.favoriteIcon}>★</Text>
+          <Text className={styles.favoriteIcon}>{isFavorite ? '★' : '☆'}</Text>
           <Text className={styles.favoriteText}>
             {isFavorite ? '已收藏' : '收藏'}
           </Text>
